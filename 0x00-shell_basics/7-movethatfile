@@ -1,2 +1,2 @@
 #!/bin/bash
-mv / tep/my_first_direactoroy
+mv /tmpmy my_first_directory/betty 
