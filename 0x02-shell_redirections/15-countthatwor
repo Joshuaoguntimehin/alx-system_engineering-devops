@@ -1,2 +1,0 @@
-#!/bin/bash
-grab -i "bin" /etc/passwd | wc -1
