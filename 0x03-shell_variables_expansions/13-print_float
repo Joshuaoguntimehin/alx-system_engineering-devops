@@ -1,2 +1,2 @@
 #!/bin/bash
-printf 'X.Zf\n' $NUM
+printf 'X.2f\n' $NUM
