@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Script to display all running processes in a user-friendly format with hierarchy
+
+echo "List of all running processes:"
+ps axjf
