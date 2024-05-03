@@ -1,0 +1,24 @@
+#!/bin/bash
+# Script to forcefully stop the '4-to_infinity_and_beyond' process
+
+process_name="4-to_infinity_and_beyond"
+
+# Try to gracefully terminate the process first
+pids=$(pgrep -x "$process_name")
+if [ -z "$pids" ]; then
+    echo "No process named '$process_name' is running."
+    exit 1
+else
+    echo "Attempting to terminate $process_name..."
+    kill -SIGTERM $pids
+    sleep 5  # Give it a few seconds to terminate
+fi
+
+# Check if the process is still running and use SIGKILL if necessary
+if pgrep -x "$process_name" > /dev/null; then
+    echo "$process_name resisted SIGTERM. Initiating SIGKILL..."
+    kill -SIGKILL $pids
+    echo "Process '$process_name' has been forcefully terminated."
+else
+    echo "Process '$process_name' terminated successfully with SIGTERM."
+fi

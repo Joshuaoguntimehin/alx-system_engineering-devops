@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#!/bin/bash
+# Script to stop the 4-to_infinity_and_beyond process using kill
+
+process_name="4-to_infinity_and_beyond"
+
+# Get the PID of the process
+pids=$(pgrep -x "$process_name")
+
+if [ -z "$pids" ]; then
+    echo "No process named '$process_name' is running."
+    exit 1
+fi
+
+# Attempt to terminate each found PID
+for pid in $pids; do
+    kill -SIGTERM $pid
+    if [ $? -eq 0 ]; then
+        echo "Process '$process_name' with PID $pid has been terminated."
+    else
+        echo "Failed to terminate process '$process_name' with PID $pid."
+    fi
+do
