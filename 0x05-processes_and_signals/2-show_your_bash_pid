@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script  that display a  Bash script that displays lines containing the bash word
+ps -u
+# shellcheck disable=SC2009
