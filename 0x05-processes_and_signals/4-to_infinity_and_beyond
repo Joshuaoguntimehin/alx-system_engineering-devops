@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# script that displays To infinity and beyond indefinitely.
+while true;do
+echo "To infinity and beyond"
+sleep 2  # Delays for 2 second; this is optional and prevents the loop from consuming too much CPU.
+done
