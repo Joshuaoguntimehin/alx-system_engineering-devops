@@ -1,4 +1,5 @@
 #!/bin/bash
 # Script to display PID and name of processes containing the word 'bash'
+echo "Processes containing 'bash':"
 pgrep -l bash
-echo "$$ bash "
+echo "The PID of this script is $$"
