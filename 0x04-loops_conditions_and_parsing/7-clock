@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Script to display time from 0:01 to 12:59
+
+hour=0  # Initialize hour
+while [ $hour -le 12 ]  # Loop through hours from 0 to 12
+do
+  echo "hour: ${hour}"	
+  minute=1  # Initialize minute
+  while [ $minute -le 59 ]  # Loop through minutes from 1 to 59
+  do
+    echo "${minute}"  # Display the time
+    ((minute++))  # Increment minute
+  done
+  ((hour++))  # Increment hour
+  minute=1  # Reset minute to 1
+done
