@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Script that prints list of files vertically with a prefix removed
+
+# Loop over all files in the current directory
+for i in *; do
+    # Print each filename, removing the part before and including the first hyphen
+    echo "${i#*-}"
+done
