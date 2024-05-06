@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#script that print best school  10 times using until
+counter=1  # Initialize counter
+# Continue loop until counter is greater than 10
+until [ $counter -gt 10 ]  
+do
+  echo "Best School"
+  ((counter++))  # Increment counter
+done
