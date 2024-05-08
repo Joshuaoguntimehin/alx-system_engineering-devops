@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# script that print it own pid
+echo "$$"
+
+# script that print a message sudo infinity
+while true; do
+	echo "To infinity and beyond"
+done
+
+# SIGINT signal
+echo SIGINT signal "I hate the kill command"  signal
