@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+The OSI model is a conceptual model that characterizes the communication functions of a telecommunication system without regard to their underlying internal structure and technology. This definition emphasizes that the OSI model is abstract and general, designed to serve as a universal set of guidelines for networking protocols to enable interoperability between different systems and technologies.
+
+Physical Layer (Layer 1): Deals with the physical aspects of sending and receiving data on a carrier, including defining the electrical, mechanical, and timing interfaces.
+Data Link Layer (Layer 2): Manages protocols, devices, and methods for the transmission of data between two physically connected devices.
+Network Layer (Layer 3): Handles packet forwarding including routing through intermediate routers.
+Transport Layer (Layer 4): Provides transparent transfer of data between end systems, or hosts, and is responsible for end-to-end error recovery and flow control.
+Session Layer (Layer 5): Manages sessions between end-user applications, i.e., it sets up, manages, and terminates the connections between the local and remote application.
+Presentation Layer (Layer 6): Translates the data format from sender to receiver into a contextually appropriate form.
+Application Layer (Layer 7): Provides services to the software through which the user interacts with the network, such as email clients, web browsers, and other types of software that require network access.
+
