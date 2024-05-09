@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# he command ping uses ICMP 
+ping 8.8.8.8
