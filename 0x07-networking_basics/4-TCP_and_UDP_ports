@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 #specific IP + port = socket.
-netstat -an -p tcp
+netstat -lp
