@@ -1,4 +1,4 @@
-# Using Puppet, install flask from pip3.
+# Puppet manifest to install Flask version 2.1.0 using pip3
 
 class install_flask {
   package { 'flask':
@@ -8,4 +8,3 @@ class install_flask {
 }
 
 include install_flask
-
