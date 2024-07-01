@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+SERVER_IP="3.83.245.5"
+
+# SSH command with single-character flags without using -l
+ssh -i ~/.ssh/school ubuntu@$SERVER_IP
