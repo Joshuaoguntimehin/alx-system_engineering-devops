@@ -1,0 +1,5 @@
+Host your_server_alias
+    HostName 3.83.245.5  # Replace with your server's IP or hostname
+    User ubuntu          # Replace with your server's username
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
