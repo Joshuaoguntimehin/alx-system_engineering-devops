@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# Define server IP address
 SERVER_IP="3.83.245.5"
 
 # SSH command with single-character flags without using -l
