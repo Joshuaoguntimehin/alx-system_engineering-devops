@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+# our Bash script must pass Shellcheck (
 prettyprinted.tech
