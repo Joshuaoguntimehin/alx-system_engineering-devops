@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# commands you used to fix the issue
+
+docker exec -it <container_id> /bin/bash
+apt-get update
+apt-get install -y apache2
+echo "Hello Holberton" > /var/www/html/index.html
+apache2ctl start
+
