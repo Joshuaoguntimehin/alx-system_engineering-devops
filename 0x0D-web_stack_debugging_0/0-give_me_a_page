@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# All your files will be interpreted
+#
+sudo docker exec -it 20910a3f5ec /bin/bash
+apt-get update
+apt-get install -y apache2
+echo "Hello Holberton" > /var/www/html/index.html
+apache2ctl start
