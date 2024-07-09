@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Define server IP address
-SERVER_IP="3.83.245.5"
+SERVER_IP="54.160.99.220"
 
 # SSH command with single-character flags without using -l
 ssh -i ~/.ssh/school ubuntu@$SERVER_IP
