@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Update package list and install Nginx if not already installed
+sudo apt-get update
+# Install Nginx
+sudo apt-get install -y nginx
+
+# Start Nginx service
+sudo service start nginx
+
+# Enable Nginx to start on boot
+#sudo service enable nginx
+
+# Create a simple HTML page
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Restart Nginx to apply changes
+sudo service restart nginx
+
+# Confirm Nginx is running
+#sudo service status nginx
+
+# Define the Nginx configuration file path
+#GINX_CONF="/etc/nginx/sites-available/default"
+# Backup the original configuration file
+#sudo cp $NGINX_CONF ${NGINX_CONF}.bak
+
+# Use sed to add the redirect configuration to the server block
+sudo sed -i 's/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;/' /etc/nginx/sites-enabled/default
+
+# Test Nginx configuration
+sudo nginx -t
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
+
+echo "Nginx has been configured to redirect /redirect_me with a 301 status."
+

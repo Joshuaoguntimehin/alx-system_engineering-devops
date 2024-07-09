@@ -6,17 +6,17 @@ sudo apt-get update
 sudo apt-get install -y nginx
 
 # Start Nginx service
-sudo systemctl start nginx
+sudo service start nginx
 
 # Enable Nginx to start on boot
-sudo systemctl enable nginx
+sudo service enable nginx
 
 # Create a simple HTML page
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
 # Restart Nginx to apply changes
-sudo systemctl restart nginx
+sudo service restart nginx
 
 # Confirm Nginx is running
-sudo systemctl status nginx
+sudo service status nginx
 
