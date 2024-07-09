@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Update package lists and install Nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Create the necessary directory
+sudo mkdir -p /etc/nginx/html
+
+# Create and write content to index.html
+sudo touch /etc/nginx/html/index.html
+echo "hello world" | sudo tee /etc/nginx/html/index.html
+
+# Create and write content to 404.html
+sudo touch /etc/nginx/html/404.html
+echo "Ceci n'est pas une page" | sudo tee /etc/nginx/html/404.html
+
+# Create and write content to www.html
+sudo touch /etc/nginx/html/www.html
+echo "Welcome to www.html" | sudo tee /etc/nginx/html/www.html
+
+# Create and configure the default site configuration
+sudo tee /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80;
+    listen [::]:80 default_server;
+    add_header X-served-By \$hostname;
+
+    rewrite ^/redirect_me http://youtube.com/@cryptotechcoder permanent;
+
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    error_page 404 /404.html;
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOF
+
+# Restart Nginx to apply the changes
+sudo service nginx restart
+
