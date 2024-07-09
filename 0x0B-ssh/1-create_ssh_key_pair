@@ -1,4 +1,5 @@
-#!/bin/env bash 
+#!/usr/bin/env bash 
+#  Create RSA key pair
 PRIVATE_KEY="school"
 PASSPHRASE="betty"
 BITS=4096
