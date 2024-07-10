@@ -1,44 +1,45 @@
 #!/usr/bin/env bash
-# Update package lists and install Nginx
-sudo apt-get update
+# Install Nginx
 sudo apt-get install -y nginx
 
-# Create the necessary directory
-sudo mkdir -p /etc/nginx/html
+# Start Nginx service
+sudo service nginx start
 
-# Create and write content to index.html
-sudo touch /etc/nginx/html/index.html
-echo "hello world" | sudo tee /etc/nginx/html/index.html
+# Enable Nginx to start on boot
+sudo systemctl enable nginx
 
-# Create and write content to 404.html
-sudo touch /etc/nginx/html/404.html
-echo "Ceci n'est pas une page" | sudo tee /etc/nginx/html/404.html
+# Create or overwrite index.html with "Hello World!"
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Create and write content to www.html
-sudo touch /etc/nginx/html/www.html
-echo "Welcome to www.html" | sudo tee /etc/nginx/html/www.html
+# Create custom 404 error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
-# Create and configure the default site configuration
-sudo tee /etc/nginx/sites-available/default <<EOF
-server {
-    listen 80;
-    listen [::]:80 default_server;
-    add_header X-served-By \$hostname;
+# Remove any existing conflicting lines in the Nginx default server block
+sudo sed -i '/rewrite \^\/redirect_me/d' /etc/nginx/sites-available/default
+sudo sed -i '/error_page 404 \/404.html/d' /etc/nginx/sites-available/default
 
-    rewrite ^/redirect_me http://youtube.com/@cryptotechcoder permanent;
+# Add redirect rule to Nginx default server block
+sudo sed -i "/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;" /etc/nginx/sites-available/default
 
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
+# Add custom 404 error page to Nginx default server block
+sudo sed -i "/listen 80 default_server;/a error_page 404 /404.html;" /etc/nginx/sites-available/default
 
-    error_page 404 /404.html;
-    server_name _;
+# Remove any existing conflicting lines in the main Nginx configuration file
+sudo sed -i '/add_header X-Served-By/d' /etc/nginx/nginx.conf
 
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-}
-EOF
+# Add custom header to Nginx configuration
+sudo sed -i '14a \\tadd_header X-Served-By '"${HOSTNAME}"';' /etc/nginx/nginx.conf
 
-# Restart Nginx to apply the changes
-sudo service nginx restart
+# Check Nginx configuration for syntax errors
+sudo nginx -t
+
+# Restart Nginx to apply changes if configuration is successful
+if [ $? -eq 0 ]; then
+    sudo service nginx restart
+else
+    echo "Nginx configuration test failed."
+fi
+
+# Check Nginx service status
+sudo service nginx status
 
