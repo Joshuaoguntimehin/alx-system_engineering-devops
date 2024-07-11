@@ -1,8 +1,36 @@
 #!/usr/bin/env bash
 # All your files will be interpreted
-#
-sudo docker exec -it 20910a3f5ec /bin/bash
-apt-get update
-apt-get install -y apache2
+
+# Enter interactive shell of Docker container
+sudo docker exec -it 55674e9e01b6 /bin/bash
+
+# Update package repositories
+sudo apt-get update
+
+# Install Apache2
+sudo apt-get install -y apache2
+
+# Echo "Hello Holberton" into index.html
 echo "Hello Holberton" > /var/www/html/index.html
+
+# Start Apache using apache2ctl
 apache2ctl start
+
+# Edit Apache ports configuration file
+echo "Listen 8080" >> /etc/apache2/ports.conf
+
+# Edit Apache virtual host configuration file
+cat << 'EOVH' > /etc/apache2/sites-available/000-default.conf
+<VirtualHost *:8080 *:80>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOVH
+
+# Restart Apache to apply changes
+apache2ctl restart
+
+EOF
