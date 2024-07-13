@@ -3,6 +3,7 @@
 domain_info(){
 	local domain="$1"
 	local subdomain="$2"
+		
 	if [ -z "$subdomain" ]; then
 		subdomain_list=("www" "lb-01" "web-01" "web-02")
 	else
