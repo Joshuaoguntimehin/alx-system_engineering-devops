@@ -1,32 +1,36 @@
 #!/usr/bin/env bash
 # Function to get DNS record information
+domain_info(){
+	lacal domain="$1"
+	local domain="$2"
+	if [ -z "$subdomain" ]; then
+		subdomain_list=("www" "lb-01" "web-01" "web-02")
+	else
+		subdomain_list=("$subdomain")
+	fi
+	for sub in "${subdomain_list[@]}"; do
+		fqdn="${sub}.${domain}"
 
-lacal domain = $1
-local domain = $2
+		dns_record=$(dig + short ANY "$fqdn")
 
-if [ -z "$subdomain" ]; then
-	subdomain_list=("www" "lb-01" "web-01" "web-02")
-else
-	subdomain_list=("$subdomain")
-fi
-for sud in "${subdomain_list[@]}"; do
-	fqdn="${sub}.${domain}"
+	if echo "$dns_record" | grep -q "CNAME"; then
+		record_type="CNAME"
+	 	destination=$(echo "$dns_record" | grep "CNAME" | awk '{print $1}')
+	else
+		record_type="A"
+		destination=$(echo "$dns_record" | awk 'NR==1')
+	fi
 
-	dns_record=$(dig + short ANY "$fqdn")
-
-if echo "$dns_record" | grep -q "CNAME"; then
-	record_type="CNAME"
-	 destination=$(echo "$dns_record" | grep "CNAME" | awk '{print $1}')
-else
-	reord_type="A"
-	destination$(echo "$dns_record" | awk 'NR==1')
-fi
-
-echo "The subdomain $sub is a $record_type record and points to $destination"
-    done
+	echo "The subdomain $sub is a $record_type record and points to $destination"
+    	done
 }
 # Check if at least one argument is provided
 if [ $# -lt 1 ]; then
     echo "Usage: $0 <domain> [subdomain]"
     exit 1
 fi
+domain=$1
+subdomain=$2
+
+# Call the function to get DNS inf
+domain_info "$domain" "$subdomain"
