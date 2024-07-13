@@ -2,16 +2,16 @@
 # Function to get DNS record information
 domain_info(){
 	lacal domain="$1"
-	local domain="$2"
+	local subdomain="$2"
 	if [ -z "$subdomain" ]; then
 		subdomain_list=("www" "lb-01" "web-01" "web-02")
 	else
 		subdomain_list=("$subdomain")
 	fi
+
 	for sub in "${subdomain_list[@]}"; do
 		fqdn="${sub}.${domain}"
-
-		dns_record=$(dig + short ANY "$fqdn")
+		dns_record=$(dig +short "$fqdn" ANY)
 
 	if echo "$dns_record" | grep -q "CNAME"; then
 		record_type="CNAME"
