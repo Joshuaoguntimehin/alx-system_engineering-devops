@@ -3,7 +3,7 @@
 import requests
 import sys
 
-
+"""import statement"""
 def fetch_employee_todo_progress(employee_id):
     """ URL for fetching user data"""
     user_url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
