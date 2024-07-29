@@ -24,7 +24,7 @@ if __name__ == "__main__":
     #   given user ID and convert the response to a JSON object
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-   # Use list comprehension to iterate over the to-do list items
+    # Use list comprehension to iterate over the to-do list items
     # Write each item's details (user ID, username, completion status,
     #   and title) as a row in the CSV file
     with open("{}.csv".format(user_id), "w", newline="") as csvfile:
