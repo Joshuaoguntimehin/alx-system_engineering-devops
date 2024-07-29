@@ -1,0 +1,1 @@
+Certainly! The if __name__ == "__main__": block in Python ensures that the script's main function runs only when the script is executed directly, rather than when it's imported as a module in another script. I'll provide you with a version of the script that adheres to this standard, with explanations for each section.
