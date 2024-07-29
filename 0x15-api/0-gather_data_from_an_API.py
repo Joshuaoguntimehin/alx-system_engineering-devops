@@ -1,62 +1,34 @@
 #!/usr/bin/python3
-"""import statement"""
+"""
+Returns to-do list information for a given employee ID.
+
+This script takes an employee ID as a command-line argument and fetches
+the corresponding user information and to-do list from the JSONPlaceholder API.
+It then prints the tasks completed by the employee.
+"""
+
 import requests
 import sys
 
 
-def fetch_employee_todo_progress(employee_id):
-    """URL for fetching user data"""
-    user_url = f'https://jsonplaceholder.typicode.com/users/{employee_id}'
-    """Fetch user data"""
-    user_response = requests.get(user_url)
-    if user_response.status_code != 200:
-        print("Error fetching user data")
-        return
-
-    """ Extract user data"""
-    user_data = user_response.json()
-    employee_name = user_data.get('name')
-
-    """URL for fetching todos"""
-    todos_url = f'https://jsonplaceholder.typicode.com/todos'
-    # Fetch todos data
-    todos_response = requests.get(todos_url)
-    if todos_response.status_code != 200:
-        print("Error fetching todos data")
-        return
-
-    # Extract todos data
-    todos_data = todos_response.json()
-
-    # Filter todos for the specific employee
-    employee_todos = [todo for todo in todos_data
-                      if todo['userId'] == employee_id]
-
-    # Calculate completed and total tasks
-    total_tasks = len(employee_todos)
-    completed_tasks = [todo for todo in employee_todos if todo['completed']]
-    number_of_done_tasks = len(completed_tasks)
-
-    # Output the employee's TODO list progress
-    print(f"Employee {employee_name} is done with"
-          f"tasks({number_of_done_tasks}/{total_tasks}):")
-
-    # Output the titles of completed tasks
-    for todo in comple
-
-    ted_tasks:
-        print(f"\t {todo['title']}")
-
-
 if __name__ == "__main__":
-    # Check if an employee ID is provided as a command-line argument
-    if len(sys.argv) != 2:
-        print("Usage: ./todo_progress.py <employee_id>")
-        sys.exit(1)
+    # Base URL for the JSONPlaceholder API
+    url = "https://jsonplaceholder.typicode.com/"
 
-    try:
-        # Convert the command-line argument to an integer
-        employee_id = int(sys.argv[1])
-        fetch_employee_todo_progress(employee_id)
-    except ValueError:
-        print("Invalid employee ID. Please enter an integer.")
+    # Get the employee information using the provided employee ID
+    employee_id = sys.argv[1]
+    user = requests.get(url + "users/{}".format(employee_id)).json()
+
+    # Get the to-do list for the employee using the provided employee ID
+    params = {"userId": employee_id}
+    todos = requests.get(url + "todos", params).json()
+
+    # Filter completed tasks and count them
+    completed = [t.get("title") for t in todos if t.get("completed") is True]
+
+    # Print the employee's name and the number of completed tasks
+    print("Employee {} is done with tasks({}/{}):".format(
+        user.get("name"), len(completed), len(todos)))
+
+    # Print the completed tasks one by one with indentation
+    [print("\t {}".format(complete)) for complete in completed]
