@@ -8,16 +8,11 @@ def number_of_subscribers(subreddit):
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     headers = {"User-Agent": "Mozilla/5.0"}
     """Send a GET request to the Reddit API"""
-    try:
-        response = requests.get(url, headers)
+
+    response = requests.get(url, headers, allow_redirects=False)
+    if response.status_code == 200:
         response.raise_for_status()
         data = response.json()
         return data.get('data', {}).get('subscriber', 0)
-    except requests.RequestException as e:
-        print(f"Error: {e}")
+    else:
         return 0
-
-
-if __name__ == "__main__":
-    subreddit = "python"  # Replace with your subreddit
-    print(f"Number of subscribers: {number_of_subscribers(subreddit)}")
