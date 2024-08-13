@@ -12,12 +12,9 @@ def number_of_subscribers(subreddit):
         response = requests.get(url, headers)
         response.raise_for_status()
         data = response.json()
-
-        subscribers = data['data']['subscribers']
-        return subscribers
-
+        return data.get('data', {}).get('subscriber', 0)
     except requests.RequestException as e:
-        pass
+        print(f"Error: {e}")
         return 0
 
 
